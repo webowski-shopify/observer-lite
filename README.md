@@ -88,7 +88,7 @@ obs.once().then(data => {
 ## 🧑‍🎤 Author
 
 **Your Name**  
-GitHub: [@yourusername](https://github.com/webowski-shopify)
+GitHub: [@webowski-shopify](https://github.com/webowski-shopify)
 
 ---
 
