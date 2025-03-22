@@ -10,7 +10,7 @@ Works in **browsers**, **Node.js**, and **Web Workers** with zero dependencies. 
 
 - 🧠 Global singleton support (via `key`)
 - 🔄 Subscribe / Unsubscribe / Unsubscribe All
-- ⏳ Promise-based `once()` for async waiting
+- ⏳ Promise-based `once()` for async waiting or `await` usage
 - 🪶 Tiny and fast — pure JavaScript
 - 🌍 Works in any environment (via `globalThis`)
 
@@ -29,21 +29,37 @@ npm install observer-lite
 ```js
 import { ObserverLite } from 'observer-lite'
 
-const obs = new ObserverLite({ key: 'userLoaded' })
+const observer = new ObserverLite({ key: 'userLoaded' })
 
-obs.subscribe(data => {
+const sub$ = observer.subscribe(data => {
   console.log('User loaded:', data)
 })
 
-obs.next({ name: 'Alice' })  // Logs: User loaded: { name: 'Alice' }
+observer.next({ name: 'Alice' })  // Logs: User loaded: { name: 'Alice' }
 ```
 
-### 🔁 Wait for a one-time event:
+---
+
+### 🔁 Wait for a one-time event (`once`) — Async/Await
 
 ```js
-obs.once().then(data => {
-  console.log('Once:', data)
+const observer = new ObserverLite({ key: 'dataReady' })
+
+// Option 1: Promise
+observer.once().then(data => {
+  console.log('Once (then):', data)
 })
+
+// Option 2: async/await
+const getData = async () => {
+  const data = await observer.once()
+  console.log('Once (await):', data)
+}
+
+getData()
+
+// Trigger the data
+observer.next('Loaded!')
 ```
 
 ---
@@ -53,9 +69,9 @@ obs.once().then(data => {
 ```html
 <script src="ObserverLite.umd.min.js"></script>
 <script>
-  const obs = new ObserverLite({ key: 'myEvent' })
-  obs.subscribe(data => console.log('Received:', data))
-  obs.next('Hello from browser!')
+  const observer = new ObserverLite({ key: 'myEvent' })
+  const sub$ = observer.subscribe(data => console.log('Received:', data))
+  observer.next('Hello from browser!')
 </script>
 ```
 
@@ -76,11 +92,11 @@ obs.once().then(data => {
 | Method                    | Description                                   |
 |---------------------------|-----------------------------------------------|
 | `new ObserverLite({key})` | Create or reuse a global instance by `key`    |
-| `.subscribe(callback)`    | Subscribe to events                           |
-| `.unsubscribe(sub)`       | Unsubscribe a specific subscription           |
+| `.subscribe(callback)`    | Subscribe to events, returns `sub$`           |
+| `.unsubscribe(sub$)`      | Unsubscribe a specific subscription           |
 | `.unsubscribeAll()`       | Remove all subscriptions                      |
 | `.next(...args)`          | Trigger event with data                       |
-| `.once()`                 | Wait for first event, returns Promise         |
+| `.once()`                 | Wait for first event — Promise/await support  |
 | `.setOnce(data)`          | Manually set data for `once()`                |
 
 ---
