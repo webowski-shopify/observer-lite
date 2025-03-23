@@ -1,6 +1,6 @@
 {
   "name": "observer-lite",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "ObserverLite.js",
   "browser": "ObserverLite.umd.min.js",
   "exports": {
