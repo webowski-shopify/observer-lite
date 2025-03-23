@@ -177,7 +177,7 @@ class AnotherUiComponent extends HTMLElement {
 }
 
 // subscribe to the componants observer
-const AnotherUiComponentChange$ = document.querySelector('another-ui-componant')?.subscribe((data) => {
+const AnotherUiComponentChange$ = document.querySelector('another-ui-component')?.subscribe((data) => {
   console.log('DATA CHANGE',data)
 })
 
