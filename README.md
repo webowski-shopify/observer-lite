@@ -7,13 +7,12 @@ Works in **browsers**, **Node.js**, and **Web Workers** with zero dependencies. 
 ---
 
 ## 🚀 Features
-
+- 🪶 Tiny and fast — pure JavaScript (1.02 KB .min / 0.52 KB gzip)
 - 🧠 Global singleton support (via optional `key`)  
   Using the same `key` across modules/components enables shared state/events via a singleton ObserverLite instance.
 - 🔄 Subscribe / Unsubscribe / Unsubscribe All
-- ⏳ Promise-based `once()` for async waiting or `await` usage
-- 🪶 Tiny and fast — pure JavaScript
-- 🌍 Works in any environment (via `globalThis`)
+- ⏳ Promise-based
+- 🌍 Works in any environment
 
 ---
 
